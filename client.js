@@ -9,10 +9,11 @@ const client = new net.Socket();
 client.connect(PORT, HOST, () => {
     console.log('Connected to the server...');
 
+    // const longMessage = 'V'.repeat(1024);//에러체크를위한 코드
     const message = "Hello";
     const buffer = Buffer.from(message);//buffer객체로 전달
 
-    const header = writeHeader(buffer.length, 10);
+    const header = writeHeader(buffer.length, 11);//handler id를 보낸다.
     const packet = Buffer.concat([header, buffer]);//header와 buffer을 합친다.
     client.write(packet);//packet을 전송
 });
